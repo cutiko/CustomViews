@@ -2,6 +2,7 @@ package com.desafiolatam.customviews;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,19 +14,27 @@ import android.widget.TextView;
 public class Header extends LinearLayout {
 
     private TextView title, subtitle;
+    private LinearLayout.LayoutParams layoutParams = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
     public Header(Context context) {
         super(context);
-
-        initViews(context);
+        initContainer();
+        initChilds(context);
     }
 
-    private void initViews(Context context) {
-        title = new TextView(context);
-        subtitle = new TextView(context);
-        LinearLayout.LayoutParams layoutParams = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+    public Header(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initChilds(context);
+    }
+
+    private void initContainer() {
         setLayoutParams(layoutParams);
         setOrientation(VERTICAL);
+    }
+
+    private void initChilds(Context context) {
+        title = new TextView(context);
+        subtitle = new TextView(context);
         title.setLayoutParams(layoutParams);
         subtitle.setLayoutParams(layoutParams);
         title.setGravity(Gravity.LEFT);
